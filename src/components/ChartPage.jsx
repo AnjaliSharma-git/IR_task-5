@@ -65,6 +65,24 @@ const ChartPage = ({ entries }) => {
     };
   };
 
+  const barChartOptions = () => {
+    const projectTimes = Object.values(projectTimeData().datasets[0].data);
+    const maxDataValue = Math.max(...projectTimes) || 1; // Fallback to 1 to avoid zero max value
+    const minDataValue = Math.min(...projectTimes);
+
+    return {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          min: Math.floor(minDataValue),  // Optionally adjust for visual clarity
+          max: Math.ceil(maxDataValue * 1.1), // 10% padding for clarity
+        },
+      },
+    };
+  };
+
   return (
     <div className="chart-page">
       <h2>Time Spent per Project</h2>
@@ -73,13 +91,7 @@ const ChartPage = ({ entries }) => {
           <h3>Bar Chart</h3>
           <Bar 
             data={projectTimeData()} 
-            options={{ 
-              responsive: true, 
-              maintainAspectRatio: false,
-              scales: { 
-                y: { beginAtZero: true } 
-              }
-            }} 
+            options={barChartOptions()} 
           />
         </div>
 
