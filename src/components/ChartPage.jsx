@@ -67,7 +67,7 @@ const ChartPage = ({ entries }) => {
 
   const barChartOptions = () => {
     const projectTimes = Object.values(projectTimeData().datasets[0].data);
-    const maxDataValue = Math.max(...projectTimes) || 1; // Fallback to 1 to avoid zero max value
+    const maxDataValue = Math.max(...projectTimes) || 1; 
     const minDataValue = Math.min(...projectTimes);
 
     return {
@@ -76,8 +76,8 @@ const ChartPage = ({ entries }) => {
       scales: {
         y: {
           beginAtZero: true,
-          min: Math.floor(minDataValue),  // Optionally adjust for visual clarity
-          max: Math.ceil(maxDataValue * 1.1), // 10% padding for clarity
+          min: Math.floor(minDataValue),  
+          max: Math.ceil(maxDataValue * 1.1), 
         },
       },
     };
